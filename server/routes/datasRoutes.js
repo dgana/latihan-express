@@ -4,8 +4,8 @@ var datasController = require('../controllers/datasController.js')
 
 router.get('/', datasController.verify, datasController.list)
 router.get('/:id', datasController.show)
-router.post('/', datasController.create)
-router.put('/:id', datasController.update)
-router.delete('/:id', datasController.remove)
+router.post('/', datasController.verify, datasController.create)
+router.put('/:id', datasController.verify, datasController.update)
+router.delete('/:id', datasController.verify, datasController.remove)
 
 module.exports = router
