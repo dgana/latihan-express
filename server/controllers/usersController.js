@@ -54,7 +54,6 @@ module.exports = {
   },
 
   verify: function (req, res, next) {
-    console.log(req.header.token)
     if (!req.headers.token) {
       res.json("You don't have access")
     } else {

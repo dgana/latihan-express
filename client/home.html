@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Login Page</title>
+  <title>Content Management System</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -12,9 +12,15 @@
 </head>
 <body>
   <nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Login Page</a>
+    <div class="nav-wrapper container">
+      <ul class="left hide-on-med-and-down">
+        <li style="margin-right:20px; font-size:24px;">Content Management System</li>
+        <li><a href="http://127.0.0.1:8080/home.html">Home</a></li>
+        <li><a href="http://127.0.0.1:8080/data.html">Data</a></li>
+        <li><a href="http://127.0.0.1:8080/datadate.html">Data Date</a></li>
+      </ul>
       <ul class="right hide-on-med-and-down">
-        <li><a href="#">Home</a></li>
+        <li><a id="logout">Logout</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
@@ -26,8 +32,8 @@
 
   <div class="container">
     <div class="section">
-
-      </div>
+      <br>
+      <h4 id="welcome_home"></h4>
     </div>
   </div>
 
@@ -39,7 +45,15 @@
 
   <script>
     $(document).ready(function(){
-      
+      if(localStorage.length === 0) {
+        location.href = 'http://127.0.0.1:8080'
+      }
+
+      $('#welcome_home').html(`Welcome, ${localStorage.getItem('email')}`)
+      $('#logout').click(function(){
+        localStorage.clear()
+        location.href = 'http://127.0.0.1:8080'
+      })
     })
   </script>
 
