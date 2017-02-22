@@ -14,24 +14,6 @@ module.exports = {
     })
   },
 
-  show: function (req, res) {
-    var id = req.params.id
-    datasModel.findOne({_id: id}, function (err, datas) {
-      if (err) {
-        return res.status(500).json({
-          message: 'Error when getting datas.',
-          error: err
-        })
-      }
-      if (!datas) {
-        return res.status(404).json({
-          message: 'No such datas'
-        })
-      }
-      return res.json(datas)
-    })
-  },
-
   create: function (req, res) {
     var datas = new datasModel({      letter: req.body.letter,      frequency: req.body.frequency
     })
@@ -87,6 +69,63 @@ module.exports = {
         })
       }
       return res.status(201).json(datas)
+    })
+  },
+
+  searchLetter: function (req, res) {
+    let search = req.query.q
+    datasModel.find({ letter: search }, function (err, datas) {
+      if (err) {
+        return res.status(500).json({
+          message: 'Error when getting datas',
+          error: err
+        })
+      }
+      if (!datas) {
+        return res.status(404).json({
+          message: 'No such datas'
+        })
+      }
+      return res.json(datas)
+    })
+  },
+
+  searchFrequency: function (req, res) {
+    let search = req.query.q
+    datasModel.find({ frequency: search }, function (err, datas) {
+      if (err) {
+        return res.status(500).json({
+          message: 'Error when getting datas',
+          error: err
+        })
+      }
+      if (!datas) {
+        return res.status(404).json({
+          message: 'No such datas'
+        })
+      }
+      return res.json(datas)
+    })
+  },
+
+  searchBoth: function (req, res) {
+    let sea = req.query.q
+    let fre = req.query.f
+    console.log(sea)
+    console.log(fre)
+    datasModel.find({ $and: [{ letter: sea, frequency: fre}] }, function (err, datas) {
+      if (err) {
+        return res.status(500).json({
+          message: 'Error when getting datas',
+          error: err
+        })
+      }
+      if (!datas) {
+        return res.status(404).json({
+          message: 'No such datas'
+        })
+      }
+      return res.json(datas)
     })
   },
 
