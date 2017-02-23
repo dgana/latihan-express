@@ -2,9 +2,8 @@ var express = require('express')
 var router = express.Router()
 var datasController = require('../controllers/datasController.js')
 
-router.get('/letter', datasController.verify, datasController.searchLetter)
-router.get('/frequency', datasController.verify, datasController.searchFrequency)
-router.get('/letterfrequency', datasController.verify, datasController.searchBoth)
+router.get('/search', datasController.verify, datasController.search)
+router.get('/searchAll', datasController.verify, datasController.searchBoth)
 
 router.get('/', datasController.verify, datasController.list)
 router.post('/', datasController.verify, datasController.create)

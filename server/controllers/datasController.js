@@ -72,27 +72,9 @@ module.exports = {
     })
   },
 
-  searchLetter: function (req, res) {
+  search: function (req, res) {
     let search = req.query.q
-    datasModel.find({ letter: search }, function (err, datas) {
-      if (err) {
-        return res.status(500).json({
-          message: 'Error when getting datas',
-          error: err
-        })
-      }
-      if (!datas) {
-        return res.status(404).json({
-          message: 'No such datas'
-        })
-      }
-      return res.json(datas)
-    })
-  },
-
-  searchFrequency: function (req, res) {
-    let search = req.query.q
-    datasModel.find({ frequency: search }, function (err, datas) {
+    datasModel.find({ $and: [{ letter: search }, { frequency: { $exists: true } }] }, function (err, datas) {
       if (err) {
         return res.status(500).json({
           message: 'Error when getting datas',
